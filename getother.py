@@ -26,6 +26,8 @@ tables.write(0, 2, 'addrB')
 tables.write(0, 3, 'addrC')
 tables.write(0, 4, 'addrD')
 tables.write(0, 5, 'location')
+tables.write(0, 6, 'FileMined/G')
+tables.write(0, 7, 'TotalStorageAvailable/G')
 
 begin=1
 url1='https://data.btfs.io/api/btfsscan/rank'
@@ -48,8 +50,13 @@ if res.status_code==200:
     all_id=[]
     for data in all_data:
         id=data['host_pid']
-        all_id.append(id)
-    for id in all_id:
+        file_size = data['file_size']
+        left_file_size = data['left_file_size']
+        all_id.append((id , file_size , left_file_size))
+    for key in all_id:
+        id = key[0]
+        file_size = round(float(key[1])/1024/1024/1024 , 2)
+        left_file_size = round(float(key[2])/1024/1024/1024 , 2)
         url2='https://data.btfs.io/api/btfsscan/check_node_id?node_id='+id
         headers2={
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36'
@@ -76,10 +83,12 @@ if res.status_code==200:
                 for co in cou:
                     if co[0]==location.lower():
                         location=co[1]
-                print(id,'  ',tron_wallet_addr,'  ',location,'  ',begin)
+                print(id,'  ',tron_wallet_addr,'  ',location,'  ',begin , '' , file_size , '' , left_file_size)
                 tables.write(begin, 0, id)
                 tables.write(begin, 1, tron_wallet_addr)
                 tables.write(begin, 5, location)
+                tables.write(begin, 6, file_size)
+                tables.write(begin, 7, left_file_size)
                 begin+=1
                 excel.save(now_time+'_other.xls')
                 sleep(1)
