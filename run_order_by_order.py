@@ -23,8 +23,11 @@ def run(name):
 if __name__ == "__main__":
     p = Pool(8)
 
+    index = 1
     for file in run_files:
         p.apply_async(run , args = (file,))
+        print(index)
+        index+=1
 
     p.close()
     p.join()
