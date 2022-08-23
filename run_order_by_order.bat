@@ -6,7 +6,7 @@ for %%i in (*) do (
     echo %%i
     @REM echo !FILE!
     if !FILE! == .py (
-        start cmd /k python %%i
+        start cmd /k python "%%i"
         choice /t 5 /d y /n >nul
     ) 
     
