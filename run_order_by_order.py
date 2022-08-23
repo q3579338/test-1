@@ -17,8 +17,10 @@ run_files = set(run_files)
 # print(run_files)
 
 def run(name):
+    #print(name)
     os.chdir(name)
-    os.popen(f"python {run_file_name} > {run_file_name}.log")
+    res = os.popen(f"python {run_file_name} > {run_file_name}.log")
+    res = res.read()
 
 if __name__ == "__main__":
     p = Pool(8)
