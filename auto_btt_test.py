@@ -31,7 +31,7 @@ def RunBtfs(index):
     else:
         command2 = "screen -Sdm btfs" + str(index)
 
-    command3 = 'btfs' + str(index) + "/bin/btfs daemon --enable-gc --chain-id 199"
+    command3 = 'btfs' + str(index) + "/bin/btfs daemon --chain-id 199"
 
     command = command0 + ' && ' + command1 + ' && ' + command2 + ' ' + command3
     print(command)
