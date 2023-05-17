@@ -42,7 +42,7 @@ def RestartBtfs(index):
 
     command = command0 + ' && ' + command1 + ' && ' + command2 + ' ' + command3
     res = os.popen(command).readlines()
-    time.sleep(5)
+    time.sleep(10)
 
 while True:
     swap = GetSwapUsed()
@@ -65,7 +65,7 @@ while True:
                             MaxNum = int(index)
         print('btfs number is : ' + str(MaxNum))
 
-        time.sleep(2)
+        time.sleep(5)
 
         #start btfs
         print('restart btfs')
