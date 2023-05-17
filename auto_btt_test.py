@@ -40,7 +40,7 @@ def RunBtfs(index):
 
 for i in range(1 , maxnumber+1):
     RunBtfs(i)
-    sleep(10)
+    sleep(20)
 
 TryNum = 10
 while TryNum > 0:
